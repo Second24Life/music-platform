@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { styled, useTheme } from '@mui/material/styles';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
 import Toolbar from '@mui/material/Toolbar';
@@ -9,13 +8,13 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import { useRouter } from 'next/router';
+import { AppBar, Box } from '@mui/material';
 
 const menuItems = [
   { text: 'Главная', href: '/' },
@@ -36,6 +35,7 @@ export default function Navbar() {
   };
 
   return (
+    <Box>
       <CssBaseline />
       <AppBar position='fixed' open={open}>
         <Toolbar>
@@ -52,23 +52,12 @@ export default function Navbar() {
           </Typography>
         </Toolbar>
       </AppBar>
-      <Drawer
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          '& .MuiDrawer-paper': {
-            width: drawerWidth,
-            boxSizing: 'border-box',
-          },
-        }}
-        variant='persistent'
-        anchor='left'
-        open={open}>
-        <DrawerHeader>
+      <Drawer variant='persistent' anchor='left' open={open}>
+        <div>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+            <ChevronLeftIcon />
           </IconButton>
-        </DrawerHeader>
+        </div>
         <Divider />
         <List>
           {menuItems.map(({ text, href }, index) => (
@@ -79,5 +68,6 @@ export default function Navbar() {
           ))}
         </List>
       </Drawer>
+    </Box>
   );
 }
